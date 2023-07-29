@@ -1,4 +1,5 @@
 const { body, validationResult } = require('express-validator');
+const Category = require('../models/category');
 const Keyboard = require('../models/keyboard');
 const Keycap = require('../models/keycap');
 const Switch = require('../models/switch');
@@ -6,10 +7,12 @@ const asyncHandler = require('express-async-handler');
 
 exports.index = asyncHandler(async (_req, res, _next) => {
     const [
+        numCategories,
         numKeyboards,
         numKeycaps,
         numSwitches
     ] = await Promise.all([
+        Category.countDocuments({}).exec(),
         Keyboard.countDocuments({}).exec(),
         Keycap.countDocuments({}).exec(),
         Switch.countDocuments({}).exec()
@@ -17,6 +20,7 @@ exports.index = asyncHandler(async (_req, res, _next) => {
 
     res.render("index", {
         title: "Keyboard Inventory Home",
+        category_count: numCategories,
         keyboard_count: numKeyboards,
         keycap_count: numKeycaps,
         switch_count: numSwitches
