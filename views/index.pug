@@ -2,4 +2,10 @@ extends layout
 
 block content
   h1= title
-  p Welcome to #{title}
+  p Welcome to #[em Keyboard Inventory]!
+  p The inventory has the following record counts:
+
+  ul
+    li #[strong Keyboards:] !{keyboard_count}
+    li #[strong Keycaps:] !{keycap_count}
+    li #[strong Switches:] !{switch_count}
