@@ -1,8 +1,14 @@
 const { body, validationResult } = require('express-validator');
 const asyncHandler = require('express-async-handler');
+const keyboard = require('../models/keyboard');
 
-exports.keyboard_list = asyncHandler(async (req, res) => {
-    res.send('TODO: Implement keyboard list');
+exports.keyboard_list = asyncHandler(async (_req, res) => {
+    const allKeyboards = await keyboard.find({}, "name description")
+        .sort({ name: 1 })
+        .populate("description")
+        .exec();
+
+    res.render("keyboard_list", { title: "Keyboard List", keyboard_list: allKeyboards });
 });
 
 exports.keyboard_detail = asyncHandler(async (req, res) => {

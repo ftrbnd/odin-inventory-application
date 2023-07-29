@@ -37,7 +37,7 @@ const SwitchSchema = new Schema({
 });
 
 SwitchSchema.virtual('url').get(function () {
-    return `/category/switches/${this._id}`;
+    return `/categories/switches/${this._id}`;
 });
 
 module.exports = mongoose.model("Switch", SwitchSchema);

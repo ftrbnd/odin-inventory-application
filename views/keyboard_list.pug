@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  h1= title
+
+  ul
+    each keyboard in keyboard_list
+      li
+        a(href=keyboard.url) #{keyboard.name}
+        |  (#{keyboard.description})
+
+    else
+      li There are no keyboards.

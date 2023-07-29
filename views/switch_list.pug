@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  h1= title
+
+  ul
+    //- "switch" is a reserved keyword
+    each keyboard_switch in switch_list
+      li
+        a(href=keyboard_switch.url) #{keyboard_switch.name}
+        |  (#{keyboard_switch.description})
+
+    else
+      li There are no switches.

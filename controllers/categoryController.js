@@ -5,7 +5,7 @@ const Keycap = require('../models/keycap');
 const Switch = require('../models/switch');
 const asyncHandler = require('express-async-handler');
 
-exports.index = asyncHandler(async (_req, res, _next) => {
+exports.index = asyncHandler(async (_req, res) => {
     const [
         numCategories,
         numKeyboards,
@@ -28,7 +28,12 @@ exports.index = asyncHandler(async (_req, res, _next) => {
 });
 
 exports.category_list = asyncHandler(async (req, res) => {
-    res.send('TODO: Implement category list');
+    const allCategories = await Category.find({}, "name description")
+        .sort({ name: 1 })
+        .populate("description")
+        .exec();
+
+    res.render("category_list", { title: "Category List", category_list: allCategories });
 });
 
 exports.category_create_get = asyncHandler(async (req, res) => {

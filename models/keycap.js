@@ -39,7 +39,7 @@ const KeycapSchema = new Schema({
 });
 
 KeycapSchema.virtual('url').get(function () {
-    return `/category/keycaps/${this._id}`;
+    return `/categories/keycaps/${this._id}`;
 });
 
 module.exports = mongoose.model("Keycap", KeycapSchema);

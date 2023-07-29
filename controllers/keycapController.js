@@ -1,8 +1,14 @@
 const { body, validationResult } = require('express-validator');
 const asyncHandler = require('express-async-handler');
+const Keycap = require('../models/keycap');
 
 exports.keycap_list = asyncHandler(async (req, res) => {
-    res.send('TODO: Implement keycap list');
+    const allKeycaps = await Keycap.find({}, "name description")
+        .sort({ name: 1 })
+        .populate("description")
+        .exec();
+
+    res.render("keycap_list", { title: "Keycap List", keycap_list: allKeycaps });
 });
 
 exports.keycap_detail = asyncHandler(async (req, res) => {

@@ -1,8 +1,14 @@
 const { body, validationResult } = require('express-validator');
 const asyncHandler = require('express-async-handler');
+const Switch = require('../models/switch');
 
-exports.switch_list = asyncHandler(async (req, res) => {
-    res.send('TODO: Implement switch list');
+exports.switch_list = asyncHandler(async (_req, res) => {
+    const allSwitches = await Switch.find({}, "name description")
+        .sort({ name: 1 })
+        .populate("description")
+        .exec();
+
+    res.render("switch_list", { title: "Switch List", switch_list: allSwitches });
 });
 
 exports.switch_detail = asyncHandler(async (req, res) => {

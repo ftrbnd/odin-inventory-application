@@ -43,7 +43,7 @@ const KeyboardSchema = new Schema({
 });
 
 KeyboardSchema.virtual('url').get(function () {
-    return `/category/keyboards/${this._id}`;
+    return `/categories/keyboards/${this._id}`;
 });
 
 module.exports = mongoose.model("Keyboard", KeyboardSchema);
