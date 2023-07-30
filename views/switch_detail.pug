@@ -1,0 +1,26 @@
+extends layout
+
+block content
+
+  h1 #{theSwitch.manufacturer} #{theSwitch.name}
+  p #{theSwitch.description}
+
+  div(style='margin-left:20px;margin-top:20px')
+
+    h4 Specifications
+
+    dl
+      dt Price
+      dd #{theSwitch.price}
+    dl
+      dt In Stock
+      dd #{theSwitch.inStock}
+    dl
+      dt Type
+      dd #{theSwitch.type}
+
+  hr
+  p
+    a(href=theSwitch.url+'/delete') Delete switch
+  p
+    a(href=theSwitch.url+'/update') Update switch

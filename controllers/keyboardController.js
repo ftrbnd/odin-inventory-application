@@ -1,9 +1,9 @@
 const { body, validationResult } = require('express-validator');
 const asyncHandler = require('express-async-handler');
-const keyboard = require('../models/keyboard');
+const Keyboard = require('../models/keyboard');
 
 exports.keyboard_list = asyncHandler(async (_req, res) => {
-    const allKeyboards = await keyboard.find({}, "name description")
+    const allKeyboards = await Keyboard.find({}, "name description")
         .sort({ name: 1 })
         .populate("description")
         .exec();
@@ -12,7 +12,17 @@ exports.keyboard_list = asyncHandler(async (_req, res) => {
 });
 
 exports.keyboard_detail = asyncHandler(async (req, res) => {
-    res.send('TODO: Implement keyboard detail');
+    const keyboard = await Keyboard.findById(req.params.id).populate("name").exec();
+
+    if (keyboard === null) {
+        const err = new Error('Keyboard not found');
+        err.status = 404;
+        return next(err);
+    }
+
+    res.render('keyboard_detail', {
+        keyboard: keyboard
+    });
 });
 
 exports.keyboard_create_get = asyncHandler(async (req, res) => {

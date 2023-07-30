@@ -1,0 +1,32 @@
+extends layout
+
+block content
+
+  h1 #{keyboard.designer} #{keyboard.name}
+  p #{keyboard.description}
+
+  div(style='margin-left:20px;margin-top:20px')
+
+    h4 Specifications
+
+    dl
+      dt Price
+      dd #{keyboard.price}
+    dl
+      dt In Stock
+      dd #{keyboard.inStock}
+    dl
+      dt Layout
+      dd #{keyboard.layout}
+    dl
+      dt Color
+      dd #{keyboard.color}
+    dl
+      dt PCB options 
+      dd Hotswap #{keyboard.solderable ? '+ Solder' : ''}
+
+  hr
+  p
+    a(href=keyboard.url+'/delete') Delete keyboard
+  p
+    a(href=keyboard.url+'/update') Update keyboard

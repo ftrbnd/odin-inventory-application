@@ -1,0 +1,26 @@
+extends layout
+
+block content
+
+  h1 #{keycap.profile} #{keycap.name}
+  p #{keycap.description}
+
+  div(style='margin-left:20px;margin-top:20px')
+
+    h4 Specifications
+
+    dl
+      dt Price
+      dd #{keycap.price}
+    dl
+      dt In Stock
+      dd #{keycap.inStock}
+    dl
+      dt Material
+      dd #{keycap.material}
+
+  hr
+  p
+    a(href=keycap.url+'/delete') Delete keycap
+  p
+    a(href=keycap.url+'/update') Update keycap

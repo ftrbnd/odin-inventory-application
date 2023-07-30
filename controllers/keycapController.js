@@ -12,7 +12,17 @@ exports.keycap_list = asyncHandler(async (req, res) => {
 });
 
 exports.keycap_detail = asyncHandler(async (req, res) => {
-    res.send('TODO: Implement keycap detail');
+    const keycap = await Keycap.findById(req.params.id).populate("name").exec();
+
+    if (keycap === null) {
+        const err = new Error('Keycap not found');
+        err.status = 404;
+        return next(err);
+    }
+
+    res.render('keycap_detail', {
+        keycap: keycap
+    });
 });
 
 exports.keycap_create_get = asyncHandler(async (req, res) => {

@@ -12,7 +12,17 @@ exports.switch_list = asyncHandler(async (_req, res) => {
 });
 
 exports.switch_detail = asyncHandler(async (req, res) => {
-    res.send('TODO: Implement switch detail');
+    const theSwitch = await Switch.findById(req.params.id).populate("name").exec();
+
+    if (theSwitch === null) {
+        const err = new Error('Switch not found');
+        err.status = 404;
+        return next(err);
+    }
+
+    res.render('switch_detail', {
+        theSwitch: theSwitch
+    });
 });
 
 exports.switch_create_get = asyncHandler(async (req, res) => {
