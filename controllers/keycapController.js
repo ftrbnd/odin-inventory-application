@@ -2,7 +2,7 @@ const { body, validationResult } = require('express-validator');
 const asyncHandler = require('express-async-handler');
 const Keycap = require('../models/keycap');
 
-exports.keycap_list = asyncHandler(async (req, res) => {
+exports.keycap_list = asyncHandler(async (_req, res) => {
     const allKeycaps = await Keycap.find({}, "name description")
         .sort({ name: 1 })
         .populate("description")

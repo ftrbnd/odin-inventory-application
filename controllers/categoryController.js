@@ -27,7 +27,7 @@ exports.index = asyncHandler(async (_req, res) => {
     });
 });
 
-exports.category_list = asyncHandler(async (req, res) => {
+exports.category_list = asyncHandler(async (_req, res) => {
     const allCategories = await Category.find({}, "name description")
         .sort({ name: 1 })
         .populate("description")
