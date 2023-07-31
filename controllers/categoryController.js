@@ -36,13 +36,43 @@ exports.category_list = asyncHandler(async (_req, res) => {
     res.render("category_list", { title: "Category List", category_list: allCategories });
 });
 
-exports.category_create_get = asyncHandler(async (req, res) => {
-    res.send('TODO: Implement category create GET');
+
+exports.category_create_get = asyncHandler(async (_req, res) => {
+    res.render("category_form", {
+        title: "Create Category",
+    });
 });
 
-exports.category_create_post = asyncHandler(async (req, res) => {
-    res.send('TODO: Implement category create POST');
-});
+exports.category_create_post = [
+    body('name', 'Category name must contain at least 3 characters')
+        .trim()
+        .isLength({ min: 3 })
+        .escape(),
+    
+    asyncHandler(async (req, res) => {
+        const errors = validationResult(req);
+        const category = new Category({
+            name: req.body.name,
+            description: req.body.description
+        });
+
+        if (!errors.isEmpty()) {
+            res.render('category_form', {
+                title: 'Create Category',
+                category: category,
+                errors: errors.array()
+            });
+        } else {
+            const categoryExists = await Category.findOne({ name: req.body.name }).exec();
+            if (categoryExists) {
+                res.redirect(categoryExists.url);
+            } else {
+                await category.save();
+                res.redirect('/categories/all'); // ideally to category.url
+            }
+        }
+    })
+];
 
 exports.category_delete_get = asyncHandler(async (req, res) => {
     res.send('TODO: Implement category delete GET');

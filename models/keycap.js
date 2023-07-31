@@ -33,8 +33,6 @@ const KeycapSchema = new Schema({
     profile: {
         type: String,
         required: true,
-        enum: ['Cherry', 'SA', 'KAT', 'DSA', 'KAM', 'DCS', 'MTNU'],
-        default: 'Cherry'
     }
 });
 

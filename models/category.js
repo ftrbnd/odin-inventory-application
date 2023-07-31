@@ -6,8 +6,6 @@ const CategorySchema = new Schema({
     name: { 
         type: String,
         required: true,
-        enum: ['Keyboards', 'Keycaps', 'Switches'],
-        default: 'Keyboards'
     },
     description: {
         type: String,

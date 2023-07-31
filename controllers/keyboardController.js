@@ -1,6 +1,7 @@
 const { body, validationResult } = require('express-validator');
 const asyncHandler = require('express-async-handler');
 const Keyboard = require('../models/keyboard');
+const Category = require('../models/category');
 
 exports.keyboard_list = asyncHandler(async (_req, res) => {
     const allKeyboards = await Keyboard.find({}, "name description")
@@ -25,13 +26,69 @@ exports.keyboard_detail = asyncHandler(async (req, res) => {
     });
 });
 
-exports.keyboard_create_get = asyncHandler(async (req, res) => {
-    res.send('TODO: Implement keyboard create GET');
+exports.keyboard_create_get = asyncHandler(async (_req, res) => {
+    const allCategories = await Category.find().exec();
+
+    res.render('keyboard_form', {
+        title: 'Create Keyboard',
+        categories: allCategories
+    });
 });
 
-exports.keyboard_create_post = asyncHandler(async (req, res) => {
-    res.send('TODO: Implement keyboard create POST');
-});
+exports.keyboard_create_post = [
+    body('name', 'Name must not be empty')
+        .trim()
+        .isLength({ min: 1 })
+        .escape(),
+    body('description', 'Description must not be empty')
+        .trim()
+        .isLength({ min: 1 })
+        .escape(),
+    body('category', 'Category must not be empty')
+        .trim()
+        .isLength({ min: 1 })
+        .escape(),
+    body('designer', 'Designer must not be empty')
+        .trim()
+        .isLength({ min: 1 })
+        .escape(),
+    body('layout', 'Layout must not be empty')
+        .trim()
+        .isLength({ min: 1 })
+        .escape(),
+    body('color', 'Color must not be empty')
+        .trim()
+        .isLength({ min: 1 })
+        .escape(),
+    
+    asyncHandler(async (req, res) => {
+        const errors = validationResult(req);
+        const keyboard = new Keyboard({
+            name: req.body.name,
+            description: req.body.description,
+            category: req.body.category,
+            price: req.body.price,
+            inStock: req.body.inStock,
+            designer: req.body.designer,
+            layout: req.body.layout,
+            color: req.body.color,
+            solderable: req.body.solderable === 'solderable'
+        });
+
+        if (!errors.isEmpty()) {
+            const allCategories = await Category.find().exec();
+
+            res.render('keyboard_form', {
+                title: 'Create Keyboard',
+                categories: allCategories,
+                errors: errors.array()
+            });
+        } else {
+            await keyboard.save();
+            res.redirect(keyboard.url);
+        }
+    })
+];
 
 exports.keyboard_delete_get = asyncHandler(async (req, res) => {
     res.send('TODO: Implement keyboard delete GET');
