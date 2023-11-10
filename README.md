@@ -13,7 +13,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/ftrbnd/odin-local-library">
+  <a href="https://github.com/ftrbnd/odin-inventory-application">
     <img src="https://avatars.githubusercontent.com/u/4441966" alt="Logo" width="80" height="80">
   </a>
 
@@ -35,6 +35,7 @@
 
 * ![JavaScript][JavaScript]
 * ![Express][Express]
+* ![Passport][Passport]
 * ![MongoDb][MongoDb]
 * ![Pug][Pug]
 * ![CSS][CSS]
@@ -61,6 +62,7 @@
 [Pug]: https://img.shields.io/badge/pug-A86454?style=for-the-badge&logo=pug&logoColor=white
 [Express]: https://img.shields.io/badge/expres-000000?style=for-the-badge&logo=express&logoColor=white
 [MongoDb]: https://img.shields.io/badge/mongodb-47A248?style=for-the-badge&logo=mongodb&logoColor=white
+[Passport]: https://img.shields.io/badge/passport-34E27A?style=for-the-badge&logo=passport&logoColor=white
 [product-screenshot-1]: https://i.imgur.com/cZ8woEQ.png
 [product-screenshot-2]: https://i.imgur.com/aTpRZhW.png
 [product-screenshot-3]: https://i.imgur.com/Q4hemEs.png
