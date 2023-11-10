@@ -35,7 +35,6 @@
 
 * ![JavaScript][JavaScript]
 * ![Express][Express]
-* ![Passport][Passport]
 * ![MongoDb][MongoDb]
 * ![Pug][Pug]
 * ![CSS][CSS]
